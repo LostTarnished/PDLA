@@ -42,6 +42,15 @@ class Parser:
                 return -self._eval(tree.children[0], variables)
             case "power":
                 return self._eval(tree.children[0], variables) ** self._eval(tree.children[1], variables)
+           
+            case "variable":
+            # On récupère le nom de la variable (le token IDENTIFIER)
+                var_name = tree.children[0].value
+                if var_name in variables:
+                    return variables[var_name]
+                else:
+                    raise ValueError(f"Undefined variable: {var_name}")
+            
             case _:
                 raise ValueError(f"Unexpected tree data: {tree.data}")
 
