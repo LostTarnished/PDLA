@@ -1,0 +1,22 @@
+name: Run Linters
+on:
+  push:
+  pull_request:
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+      - name: Installer uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+      - name: Installer Python 3.13
+        run: uv python install 3.13
+      - name: Installer les dépendances
+        run: uv sync --locked
+      - name: Lancer Ruff (Linting)
+        run: uv run poe lint
+      - name: Lancer Ty (Type-checking)
+        run: uv run poe typecheck
