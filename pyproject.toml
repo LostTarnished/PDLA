@@ -27,6 +27,5 @@ dev = [
 [tool.poe.tasks]
 format = "ruff format ."
 lint = "ruff check ."
-typecheck = "ty"
-# Tâche combinée pour la CI
+typecheck = "ty check ."  # Ajout de 'check .' au lieu de 'ty' seul
 check = ["lint", "typecheck"]
